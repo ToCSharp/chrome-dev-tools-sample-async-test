@@ -1,0 +1,750 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{39794867-171E-4582-B9F1-FF4CABA216CD}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>chrome_dev_tools_sample_async_test</RootNamespace>
+    <AssemblyName>chrome-dev-tools-sample-async-test</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.0.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.0.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.4.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Threading.Tasks.Dataflow, Version=4.6.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Dataflow.4.8.0\lib\netstandard2.0\System.Threading.Tasks.Dataflow.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WebSocket4Net, Version=0.14.1.0, Culture=neutral, PublicKeyToken=eb4e154b696bf72a, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebSocket4Net.0.14.1\lib\net45\WebSocket4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="ChromeSessionInfo.cs" />
+    <Compile Include="RequestInfo.cs" />
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Accessibility\AccessibilityAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Accessibility\AXGlobalStates.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Accessibility\AXLiveRegionAttributes.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Accessibility\AXNode.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Accessibility\AXProperty.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Accessibility\AXRelatedNode.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Accessibility\AXRelationshipAttributes.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Accessibility\AXValue.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Accessibility\AXValueNativeSourceType.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Accessibility\AXValueSource.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Accessibility\AXValueSourceType.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Accessibility\AXValueType.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Accessibility\AXWidgetAttributes.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Accessibility\AXWidgetStates.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Accessibility\GetPartialAXTreeCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Animation\Animation.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Animation\AnimationAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Animation\AnimationCanceledEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Animation\AnimationCreatedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Animation\AnimationEffect.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Animation\AnimationStartedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Animation\DisableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Animation\EnableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Animation\GetCurrentTimeCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Animation\GetPlaybackRateCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Animation\KeyframesRule.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Animation\KeyframeStyle.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Animation\ReleaseAnimationsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Animation\ResolveAnimationCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Animation\SeekAnimationsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Animation\SetPausedCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Animation\SetPlaybackRateCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Animation\SetTimingCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ApplicationCache\ApplicationCache.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ApplicationCache\ApplicationCacheAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ApplicationCache\ApplicationCacheResource.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ApplicationCache\ApplicationCacheStatusUpdatedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ApplicationCache\EnableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ApplicationCache\FrameWithManifest.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ApplicationCache\GetApplicationCacheForFrameCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ApplicationCache\GetFramesWithManifestsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ApplicationCache\GetManifestForFrameCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ApplicationCache\NetworkStateUpdatedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Browser\Bounds.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Browser\BrowserAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Browser\GetWindowBoundsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Browser\GetWindowForTargetCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Browser\SetWindowBoundsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Browser\WindowState.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CacheStorage\Cache.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CacheStorage\CacheStorageAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CacheStorage\DataEntry.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CacheStorage\DeleteCacheCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CacheStorage\DeleteEntryCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CacheStorage\RequestCacheNamesCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CacheStorage\RequestEntriesCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ChromeSession.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ChromeSession_Domains.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CommandResponseException.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CommandResponseExtensions.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CommandResponseTypeMap.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Console\ClearMessagesCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Console\ConsoleAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Console\ConsoleMessage.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Console\DisableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Console\EnableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Console\MessageAddedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\AddRuleCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\CollectClassNamesCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\ComputedStyle.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\CreateStyleSheetCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\CSSAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\CSSComputedStyleProperty.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\CSSKeyframeRule.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\CSSKeyframesRule.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\CSSMedia.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\CSSProperty.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\CSSRule.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\CSSStyle.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\CSSStyleSheetHeader.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\DisableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\EnableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\FontsUpdatedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\ForcePseudoStateCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\GetBackgroundColorsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\GetComputedStyleForNodeCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\GetInlineStylesForNodeCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\GetLayoutTreeAndStylesCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\GetMatchedStylesForNodeCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\GetMediaQueriesCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\GetPlatformFontsForNodeCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\GetStyleSheetTextCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\InheritedStyleEntry.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\InlineTextBox.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\LayoutTreeNode.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\MediaQuery.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\MediaQueryExpression.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\MediaQueryResultChangedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\PlatformFontUsage.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\PseudoElementMatches.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\RuleMatch.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\RuleUsage.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\SelectorList.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\SetEffectivePropertyValueForNodeCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\SetKeyframeKeyCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\SetMediaTextCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\SetRuleSelectorCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\SetStyleSheetTextCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\SetStyleTextsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\ShorthandEntry.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\SourceRange.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\StartRuleUsageTrackingCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\StopRuleUsageTrackingCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\StyleDeclarationEdit.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\StyleSheetAddedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\StyleSheetChangedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\StyleSheetOrigin.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\StyleSheetRemovedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\TakeCoverageDeltaCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\CSS\Value.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Database\AddDatabaseEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Database\Database.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Database\DatabaseAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Database\DisableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Database\EnableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Database\Error.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Database\ExecuteSQLCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Database\GetDatabaseTableNamesCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\BreakLocation.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\BreakpointResolvedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\CallFrame.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\ContinueToLocationCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\DebuggerAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\DisableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\EnableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\EvaluateOnCallFrameCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\GetPossibleBreakpointsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\GetScriptSourceCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\Location.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\PauseCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\PausedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\RemoveBreakpointCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\RestartFrameCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\ResumeCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\ResumedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\ScheduleStepIntoAsyncCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\Scope.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\ScriptFailedToParseEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\ScriptParsedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\ScriptPosition.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\SearchInContentCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\SearchMatch.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\SetAsyncCallStackDepthCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\SetBlackboxedRangesCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\SetBlackboxPatternsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\SetBreakpointByUrlCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\SetBreakpointCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\SetBreakpointsActiveCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\SetPauseOnExceptionsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\SetScriptSourceCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\SetSkipAllPausesCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\SetVariableValueCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\StepIntoCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\StepOutCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Debugger\StepOverCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DeviceOrientation\ClearDeviceOrientationOverrideCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DeviceOrientation\DeviceOrientationAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DeviceOrientation\SetDeviceOrientationOverrideCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOMDebugger\DOMBreakpointType.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOMDebugger\DOMDebuggerAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOMDebugger\EventListener.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOMDebugger\GetEventListenersCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOMDebugger\RemoveDOMBreakpointCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOMDebugger\RemoveEventListenerBreakpointCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOMDebugger\RemoveInstrumentationBreakpointCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOMDebugger\RemoveXHRBreakpointCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOMDebugger\SetDOMBreakpointCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOMDebugger\SetEventListenerBreakpointCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOMDebugger\SetInstrumentationBreakpointCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOMDebugger\SetXHRBreakpointCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOMStorage\ClearCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOMStorage\DisableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOMStorage\DOMStorageAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOMStorage\DomStorageItemAddedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOMStorage\DomStorageItemRemovedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOMStorage\DomStorageItemsClearedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOMStorage\DomStorageItemUpdatedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOMStorage\EnableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOMStorage\GetDOMStorageItemsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOMStorage\RemoveDOMStorageItemCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOMStorage\SetDOMStorageItemCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOMStorage\StorageId.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\AttributeModifiedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\AttributeRemovedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\BackendNode.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\BoxModel.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\CharacterDataModifiedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\ChildNodeCountUpdatedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\ChildNodeInsertedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\ChildNodeRemovedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\CollectClassNamesFromSubtreeCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\CopyToCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\DisableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\DiscardSearchResultsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\DistributedNodesUpdatedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\DocumentUpdatedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\DOMAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\EnableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\FocusCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\GetAttributesCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\GetBoxModelCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\GetDocumentCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\GetFlattenedDocumentCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\GetHighlightObjectForTestCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\GetNodeForLocationCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\GetOuterHTMLCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\GetRelayoutBoundaryCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\GetSearchResultsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\HideHighlightCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\HighlightConfig.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\HighlightFrameCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\HighlightNodeCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\HighlightQuadCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\HighlightRectCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\InlineStyleInvalidatedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\InspectMode.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\InspectNodeRequestedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\MarkUndoableStateCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\MoveToCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\Node.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\NodeHighlightRequestedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\PerformSearchCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\PseudoElementAddedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\PseudoElementRemovedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\PseudoType.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\PushNodeByPathToFrontendCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\PushNodesByBackendIdsToFrontendCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\QuerySelectorAllCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\QuerySelectorCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\Rect.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\RedoCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\RemoveAttributeCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\RemoveNodeCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\RequestChildNodesCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\RequestNodeCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\ResolveNodeCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\RGBA.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\SetAttributesAsTextCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\SetAttributeValueCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\SetChildNodesEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\SetFileInputFilesCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\SetInspectedNodeCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\SetInspectModeCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\SetNodeNameCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\SetNodeValueCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\SetOuterHTMLCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\ShadowRootPoppedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\ShadowRootPushedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\ShadowRootType.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\ShapeOutsideInfo.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\DOM\UndoCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Emulation\CanEmulateCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Emulation\ClearDeviceMetricsOverrideCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Emulation\ClearGeolocationOverrideCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Emulation\EmulationAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Emulation\ForceViewportCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Emulation\ResetPageScaleFactorCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Emulation\ResetViewportCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Emulation\ScreenOrientation.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Emulation\SetCPUThrottlingRateCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Emulation\SetDefaultBackgroundColorOverrideCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Emulation\SetDeviceMetricsOverrideCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Emulation\SetEmulatedMediaCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Emulation\SetGeolocationOverrideCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Emulation\SetPageScaleFactorCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Emulation\SetScriptExecutionDisabledCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Emulation\SetTouchEmulationEnabledCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Emulation\SetVirtualTimePolicyCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Emulation\SetVisibleSizeCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Emulation\VirtualTimeBudgetExpiredEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Emulation\VirtualTimePolicy.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\EventTypeMap.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\HeapProfiler\AddHeapSnapshotChunkEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\HeapProfiler\AddInspectedHeapObjectCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\HeapProfiler\CollectGarbageCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\HeapProfiler\DisableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\HeapProfiler\EnableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\HeapProfiler\GetHeapObjectIdCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\HeapProfiler\GetObjectByHeapObjectIdCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\HeapProfiler\HeapProfilerAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\HeapProfiler\HeapStatsUpdateEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\HeapProfiler\LastSeenObjectIdEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\HeapProfiler\ReportHeapSnapshotProgressEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\HeapProfiler\ResetProfilesEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\HeapProfiler\SamplingHeapProfile.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\HeapProfiler\SamplingHeapProfileNode.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\HeapProfiler\StartSamplingCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\HeapProfiler\StartTrackingHeapObjectsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\HeapProfiler\StopSamplingCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\HeapProfiler\StopTrackingHeapObjectsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\HeapProfiler\TakeHeapSnapshotCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ICommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\IEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\IndexedDB\ClearObjectStoreCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\IndexedDB\DatabaseWithObjectStores.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\IndexedDB\DataEntry.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\IndexedDB\DeleteDatabaseCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\IndexedDB\DisableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\IndexedDB\EnableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\IndexedDB\IndexedDBAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\IndexedDB\Key.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\IndexedDB\KeyPath.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\IndexedDB\KeyRange.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\IndexedDB\ObjectStore.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\IndexedDB\ObjectStoreIndex.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\IndexedDB\RequestDatabaseCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\IndexedDB\RequestDatabaseNamesCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\IndexedDB\RequestDataCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Input\DispatchKeyEventCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Input\DispatchMouseEventCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Input\DispatchTouchEventCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Input\EmulateTouchFromMouseEventCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Input\GestureSourceType.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Input\InputAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Input\SynthesizePinchGestureCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Input\SynthesizeScrollGestureCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Input\SynthesizeTapGestureCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Input\TouchPoint.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Inspector\DetachedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Inspector\DisableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Inspector\EnableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Inspector\InspectorAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Inspector\TargetCrashedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\IO\CloseCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\IO\IOAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\IO\ReadCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\LayerTree\CompositingReasonsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\LayerTree\DisableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\LayerTree\EnableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\LayerTree\Layer.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\LayerTree\LayerPaintedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\LayerTree\LayerTreeAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\LayerTree\LayerTreeDidChangeEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\LayerTree\LoadSnapshotCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\LayerTree\MakeSnapshotCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\LayerTree\PictureTile.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\LayerTree\ProfileSnapshotCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\LayerTree\ReleaseSnapshotCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\LayerTree\ReplaySnapshotCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\LayerTree\ScrollRect.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\LayerTree\SnapshotCommandLogCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Log\ClearCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Log\DisableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Log\EnableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Log\EntryAddedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Log\LogAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Log\LogEntry.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Log\StartViolationsReportCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Log\StopViolationsReportCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Log\ViolationSetting.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Memory\GetDOMCountersCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Memory\MemoryAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Memory\PressureLevel.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Memory\SetPressureNotificationsSuppressedCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Memory\SimulatePressureNotificationCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\BlockedReason.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\CachedResource.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\CanClearBrowserCacheCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\CanClearBrowserCookiesCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\CanEmulateNetworkConditionsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\ClearBrowserCacheCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\ClearBrowserCookiesCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\ConnectionType.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\Cookie.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\CookieSameSite.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\DataReceivedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\DeleteCookieCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\DisableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\EmulateNetworkConditionsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\EnableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\EventSourceMessageReceivedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\GetAllCookiesCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\GetCertificateCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\GetCookiesCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\GetResponseBodyCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\Headers.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\Initiator.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\LoadingFailedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\LoadingFinishedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\NetworkAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\ReplayXHRCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\Request.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\RequestServedFromCacheEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\RequestWillBeSentEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\ResourceChangedPriorityEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\ResourcePriority.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\ResourceTiming.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\Response.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\ResponseReceivedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\SecurityDetails.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\SetBlockedURLsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\SetBypassServiceWorkerCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\SetCacheDisabledCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\SetCookieCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\SetDataSizeLimitsForTestCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\SetExtraHTTPHeadersCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\SetMonitoringXHREnabledCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\SetUserAgentOverrideCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\SignedCertificateTimestamp.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\WebSocketClosedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\WebSocketCreatedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\WebSocketFrame.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\WebSocketFrameErrorEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\WebSocketFrameReceivedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\WebSocketFrameSentEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\WebSocketHandshakeResponseReceivedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\WebSocketRequest.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\WebSocketResponse.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Network\WebSocketWillSendHandshakeRequestEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\AddScriptToEvaluateOnLoadCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\AppManifestError.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\CaptureScreenshotCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\ClearDeviceMetricsOverrideCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\ClearDeviceOrientationOverrideCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\ClearGeolocationOverrideCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\ColorPickedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\ConfigureOverlayCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\DeleteCookieCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\DialogType.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\DisableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\DomContentEventFiredEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\EnableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\Frame.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\FrameAttachedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\FrameClearedScheduledNavigationEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\FrameDetachedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\FrameNavigatedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\FrameResizedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\FrameResource.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\FrameResourceTree.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\FrameScheduledNavigationEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\FrameStartedLoadingEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\FrameStoppedLoadingEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\GetAppManifestCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\GetCookiesCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\GetLayoutMetricsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\GetNavigationHistoryCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\GetResourceContentCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\GetResourceTreeCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\HandleJavaScriptDialogCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\InterstitialHiddenEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\InterstitialShownEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\JavascriptDialogClosedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\JavascriptDialogOpeningEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\LayoutViewport.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\LoadEventFiredEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\NavigateCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\NavigateToHistoryEntryCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\NavigationEntry.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\NavigationRequestedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\NavigationResponse.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\PageAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\PrintToPDFCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\ProcessNavigationCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\ReloadCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\RemoveScriptToEvaluateOnLoadCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\RequestAppBannerCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\ResourceType.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\ScreencastFrameAckCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\ScreencastFrameEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\ScreencastFrameMetadata.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\ScreencastVisibilityChangedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\SearchInResourceCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\SetAutoAttachToCreatedPagesCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\SetColorPickerEnabledCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\SetControlNavigationsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\SetDeviceMetricsOverrideCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\SetDeviceOrientationOverrideCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\SetDocumentContentCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\SetGeolocationOverrideCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\SetTouchEmulationEnabledCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\StartScreencastCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\StopLoadingCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\StopScreencastCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Page\VisualViewport.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Profiler\ConsoleProfileFinishedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Profiler\ConsoleProfileStartedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Profiler\CoverageRange.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Profiler\DisableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Profiler\EnableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Profiler\FunctionCoverage.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Profiler\GetBestEffortCoverageCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Profiler\PositionTickInfo.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Profiler\Profile.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Profiler\ProfileNode.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Profiler\ProfilerAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Profiler\ScriptCoverage.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Profiler\SetSamplingIntervalCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Profiler\StartCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Profiler\StartPreciseCoverageCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Profiler\StopCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Profiler\StopPreciseCoverageCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Profiler\TakePreciseCoverageCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Rendering\RenderingAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Rendering\SetShowDebugBordersCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Rendering\SetShowFPSCounterCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Rendering\SetShowPaintRectsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Rendering\SetShowScrollBottleneckRectsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Rendering\SetShowViewportSizeOnResizeCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\AwaitPromiseCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\CallArgument.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\CallFrame.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\CallFunctionOnCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\CompileScriptCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\ConsoleAPICalledEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\CustomPreview.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\DisableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\DiscardConsoleEntriesCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\EnableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\EntryPreview.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\EvaluateCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\ExceptionDetails.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\ExceptionRevokedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\ExceptionThrownEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\ExecutionContextCreatedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\ExecutionContextDescription.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\ExecutionContextDestroyedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\ExecutionContextsClearedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\GetPropertiesCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\InspectRequestedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\InternalPropertyDescriptor.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\ObjectPreview.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\PropertyDescriptor.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\PropertyPreview.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\ReleaseObjectCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\ReleaseObjectGroupCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\RemoteObject.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\RunIfWaitingForDebuggerCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\RunScriptCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\RuntimeAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\SetCustomObjectFormatterEnabledCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\StackTrace.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Runtime\UnserializableValue.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Schema\Domain.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Schema\GetDomainsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Schema\SchemaAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Security\CertificateErrorAction.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Security\CertificateErrorEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Security\DisableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Security\EnableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Security\HandleCertificateErrorCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Security\InsecureContentStatus.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Security\SecurityAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Security\SecurityState.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Security\SecurityStateChangedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Security\SecurityStateExplanation.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Security\SetOverrideCertificateErrorsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Security\ShowCertificateViewerCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ServiceWorker\DeliverPushMessageCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ServiceWorker\DisableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ServiceWorker\DispatchSyncEventCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ServiceWorker\EnableCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ServiceWorker\InspectWorkerCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ServiceWorker\ServiceWorkerAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ServiceWorker\ServiceWorkerErrorMessage.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ServiceWorker\ServiceWorkerRegistration.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ServiceWorker\ServiceWorkerVersion.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ServiceWorker\ServiceWorkerVersionRunningStatus.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ServiceWorker\ServiceWorkerVersionStatus.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ServiceWorker\SetForceUpdateOnPageLoadCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ServiceWorker\SkipWaitingCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ServiceWorker\StartWorkerCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ServiceWorker\StopWorkerCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ServiceWorker\UnregisterCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ServiceWorker\UpdateRegistrationCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ServiceWorker\WorkerErrorReportedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ServiceWorker\WorkerRegistrationUpdatedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\ServiceWorker\WorkerVersionUpdatedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Storage\ClearDataForOriginCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Storage\StorageAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Storage\StorageType.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\SystemInfo\GetInfoCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\SystemInfo\GPUDevice.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\SystemInfo\GPUInfo.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\SystemInfo\SystemInfoAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Target\ActivateTargetCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Target\AttachedToTargetEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Target\AttachToTargetCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Target\CloseTargetCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Target\CreateBrowserContextCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Target\CreateTargetCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Target\DetachedFromTargetEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Target\DetachFromTargetCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Target\DisposeBrowserContextCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Target\GetTargetInfoCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Target\GetTargetsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Target\ReceivedMessageFromTargetEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Target\RemoteLocation.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Target\SendMessageToTargetCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Target\SetAttachToFramesCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Target\SetAutoAttachCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Target\SetDiscoverTargetsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Target\SetRemoteLocationsCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Target\TargetAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Target\TargetCreatedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Target\TargetDestroyedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Target\TargetInfo.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Tethering\AcceptedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Tethering\BindCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Tethering\TetheringAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Tethering\UnbindCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Tracing\BufferUsageEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Tracing\DataCollectedEvent.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Tracing\EndCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Tracing\GetCategoriesCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Tracing\MemoryDumpConfig.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Tracing\RecordClockSyncMarkerCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Tracing\RequestMemoryDumpCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Tracing\StartCommand.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Tracing\TraceConfig.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Tracing\TracingAdapter.cs" />
+    <Compile Include="BaristaLabs.ChromeDevTools.Runtime\Tracing\TracingCompleteEvent.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

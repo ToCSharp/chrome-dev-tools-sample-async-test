@@ -1,0 +1,23 @@
+﻿<Window x:Class="chrome_dev_tools_sample_async_test.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:chrome_dev_tools_sample_async_test"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="249*"/>
+            <ColumnDefinition Width="268*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="62*"/>
+            <RowDefinition Height="257*"/>
+        </Grid.RowDefinitions>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="30,10,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <ListBox x:Name="lbRequests" Grid.Row="1" SelectionChanged="lbRequests_SelectionChanged"/>
+        <TextBox x:Name="tbRequestData" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="TextBox"/>
+
+    </Grid>
+</Window>
