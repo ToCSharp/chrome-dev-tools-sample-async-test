@@ -87,6 +87,7 @@ namespace chrome_dev_tools_sample_async_test
                     {
                         // WORKS only when one thread ask GetResponseBody
                         // If many threads, gives wrong results. Try comment // semaphore.Wait(); and look requests body 
+                        // Not correct bodies in some requests
                         semaphore.Wait();
                         var body = await session.Network.GetResponseBody(new Network.GetResponseBodyCommand { RequestId = reqId });
                         if (body.Base64Encoded)
